@@ -10,7 +10,7 @@ const (
 )
 
 type Job struct {
-	Id        bson.ObjectId `json:"_id, omitempty" bson:"_id, omitempty"`
+	Id        bson.ObjectId `json:"_id,omitempty" bson:"_id,omitempty"`
 	Name      string        `json:"name" form:"name" binding:"required" bson:"name"`
 	Success   bool          `json:"success" form:"success" binding:"required" bson:"success"`
 	CreatedOn int64         `json:"created_on" bson:"created_on"`
