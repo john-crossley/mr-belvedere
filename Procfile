@@ -1,1 +1,1 @@
-web: go-gin-mgo-demo
+web: mr-belvedere
