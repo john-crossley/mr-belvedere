@@ -25,6 +25,9 @@ func main() {
 
     v1 := router.Group("api/v1")
     {
+		v1.GET("/", func(c *gin.Context) {
+			c.JSON(200, gin.H{"error": false, "message": "Mr Belvedere at your service..."})
+		})
         v1.GET("/jobs", jobs.List)
 		v1.GET("/jobs/:id", jobs.Find)
 		v1.POST("/jobs", jobs.Create)
