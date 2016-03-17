@@ -20,6 +20,7 @@ func init() {
 func main() {
     router := gin.Default()
 
+	router.Use(middlewares.TokenAuthenticate)
 	router.Use(middlewares.Connect)
 	router.Use(middlewares.ErrorHandler)
 

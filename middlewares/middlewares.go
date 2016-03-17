@@ -4,7 +4,31 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/john-crossley/mr-belvedere/db"
 	"net/http"
+	"os"
 )
+
+func respondWithError(code int, message string, c *gin.Context) {
+	response := map[string]string{"error": message}
+
+	c.JSON(code, response)
+	c.Abort()
+}
+
+func TokenAuthenticate(c *gin.Context) {
+	token := c.Request.FormValue("api_token")
+
+	if token == "" {
+		respondWithError(http.StatusUnauthorized, "API token required", c)
+		return
+	}
+
+	if token != os.Getenv("API_TOKEN") {
+		respondWithError(http.StatusUnauthorized, "Invalid API token", c)
+		return
+	}
+
+	c.Next()
+}
 
 // Connect middleware clones the database session for each request
 // and makes the `db` object available for each handler
