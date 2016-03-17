@@ -1,0 +1,27 @@
+package middlewares
+
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/john-crossley/mr-belvedere/db"
+	"net/http"
+)
+
+// Connect middleware clones the database session for each request
+// and makes the `db` object available for each handler
+func Connect(c *gin.Context) {
+	session := db.Session.Clone()
+	defer session.Close()
+
+	c.Set("db", session.DB(db.Mongo.Database))
+	c.Next()
+}
+
+// ErrorHandler is a middleware to handle errors encountered during requests.
+func ErrorHandler(c *gin.Context) {
+	c.Next()
+
+	if len(c.Errors) > 0 {
+		c.JSON(http.StatusInternalServerError,
+			gin.H{"error": true, "message": c.Errors.String()})
+	}
+}
