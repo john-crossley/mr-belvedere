@@ -3,7 +3,7 @@
 require "json"
 require "open-uri"
 
-request_uri = "https://mr-belvedere.herokuapp.com/api/v1/jobs?api_token=56da7744-ec3a-11e5-9ce9-5e5517507c66"
+request_uri = "https://mr-belvedere.herokuapp.com/api/v1/jobs?api_token=EMAIL ME FOR API KEY"
 
 buffer = open(request_uri).read
 results = JSON.parse(buffer, symbolize_names: true)
