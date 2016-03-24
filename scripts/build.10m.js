@@ -12,10 +12,12 @@ got(belvEndpoint)
     const data = JSON.parse(response.body);
 
     data.map(item => {
-      if (item.success) {
+      if (item.status == "success") {
         console.log(`${item.name} is stable :thumbsup:`)
-      } else {
+      } else if (item.status == "failure") {
         console.log(`${item.name} is failing :thumbsdown: |color=red`)
+      } else if (item.stauts == "building") {
+        console.log(`${item.name} is building :construction_worker: |color=orange`)
       }
     })
 
