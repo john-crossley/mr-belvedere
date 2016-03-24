@@ -63,17 +63,17 @@ func Update(c *gin.Context) {
 		c.Error(err)
 	}
 
-	query := bson.M{"_id": bson.ObjectIdHex(c.Params.ByName("id"))}
-	doc := bson.M{
+	id := c.Params.ByName("id")
+	doc := bson.M {
 		"name": job.Name,
-		"success": job.Success,
+		"status": job.Status,
 		"updated_on": time.Now().UnixNano() / int64(time.Millisecond),
 	}
-	err = db.C(models.CollectionJob).Update(query, doc)
-	if err != nil {
+	jobDoc, upsertERR := db.C(models.CollectionJob).UpsertId(id, doc)
+	if upsertERR != nil {
 		c.Error(err)
 	}
-	c.JSON(http.StatusOK, job)
+	c.JSON(http.StatusOK, jobDoc)
 }
 
 func Delete(c *gin.Context) {

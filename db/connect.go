@@ -15,7 +15,7 @@ var (
 )
 
 const (
-    MongoDBUrl = "mongodb://:@ds015899.mlab.com:15899/mr-belvedere"
+    MongoDBUrl = "mongodb://localhost:27017/mr-belvedere"
 )
 
 // Connect connects to mongodb
