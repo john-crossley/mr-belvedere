@@ -10,12 +10,13 @@ const belvEndpoint = `https://mr-belvedere.herokuapp.com/api/v1/jobs?api_token=$
 got(belvEndpoint)
   .then(response => {
     const data = JSON.parse(response.body);
-
     data.map(item => {
-      if (item.success) {
-        console.log(`${item.name} is stable :thumbsup:`)
-      } else {
-        console.log(`${item.name} is failing :thumbsdown: |color=red`)
+      if (item.status == "success") {
+        console.log(`${item.name} is stable :thumbsup: | color=green`)
+      } else if (item.status == "failure") {
+        console.log(`${item.name} is failing :thumbsdown: | color=red`)
+      } else if (item.status == "building") {
+        console.log(`${item.name} is building :construction_worker: | color=orange`)
       }
     })
 
