@@ -67,6 +67,7 @@ func Update(c *gin.Context) {
 	doc := bson.M {
 		"name": job.Name,
 		"status": job.Status,
+		"author": job.Author,
 		"updated_on": time.Now().UnixNano() / int64(time.Millisecond),
 	}
 	jobDoc, upsertERR := db.C(models.CollectionJob).UpsertId(id, doc)
