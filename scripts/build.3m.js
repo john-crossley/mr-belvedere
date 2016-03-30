@@ -2,15 +2,17 @@
 
 'use strict';
 
-const got = require('/usr/local/lib/node_modules/got');
+const request = require('https').get;
 
 const API_TOKEN = 'PUT_TOKEN_HERE';
 const belvEndpoint = `https://mr-belvedere.herokuapp.com/api/v1/jobs?api_token=${API_TOKEN}`;
 
-got(belvEndpoint)
-  .then(response => {
-    const data = JSON.parse(response.body);
-    data.map(item => {
+request(belvEndpoint, res => {
+  res.setEncoding('utf8');
+  res.on('data', data => {
+
+    const response = JSON.parse(data);
+    response.map(item => {
       if (item.status == "success") {
         console.log(`${item.name} is stable :thumbsup: | color=green`)
       } else if (item.status == "failure") {
@@ -21,6 +23,6 @@ got(belvEndpoint)
     })
 
   })
-  .catch(() => {
-    console.log('Error parsing response');
-  });
+}).on('error', e => {
+  console.log('Error fetching builds')
+});
