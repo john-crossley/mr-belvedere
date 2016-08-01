@@ -64,7 +64,7 @@ func Update(c *gin.Context) {
 	}
 
 	id := c.Params.ByName("id")
-	doc := bson.M {
+	doc := bson.M{
 		"name": job.Name,
 		"status": job.Status,
 		"author": job.Author,

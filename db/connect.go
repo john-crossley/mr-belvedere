@@ -7,15 +7,12 @@ import (
 )
 
 var (
-    // Session stores mongo session
     Session *mgo.Session
-
-    // Mongo stores the mongodb connection string information
     Mongo *mgo.DialInfo
 )
 
 const (
-    MongoDBUrl = "mongodb://localhost:27017/mr-belvedere"
+    MongoDbURI = "mongodb://localhost:27017/mr-belvedere"
 )
 
 // Connect connects to mongodb
@@ -23,7 +20,7 @@ func Connect() {
     uri := os.Getenv("MONGODB_URL")
 
     if len(uri) == 0 {
-        uri = MongoDBUrl
+        uri = MongoDbURI
     }
 
     mongo, err := mgo.ParseURL(uri)

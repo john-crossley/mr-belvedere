@@ -5,7 +5,7 @@ import (
 )
 
 const (
-// CollectionJob holds the name of the jobs collection
+	// CollectionJob holds the name of the jobs collection
 	CollectionJob = "jobs"
 )
 
