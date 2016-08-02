@@ -5,7 +5,6 @@ import (
 	"github.com/john-crossley/mr-belvedere/db"
 	"net/http"
 	"os"
-	"os"
 )
 
 func respondWithError(code int, message string, c *gin.Context) {
