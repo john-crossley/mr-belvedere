@@ -5,7 +5,7 @@ require "open-uri"
 
 API_TOKEN = "05561e32-77d6-4bb3-babe-3bb620837225"
 
-request_uri = "https://mr-belvedere-go.herokuapp.com/api/v1/jobs?api_token=#{API_TOKEN}"
+request_uri = "https://mr-belvedere.herokuapp.com/api/v1/jobs?api_token=#{API_TOKEN}"
 
 def get_color_for_status(status)
   case status

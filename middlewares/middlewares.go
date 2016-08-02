@@ -4,7 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/john-crossley/mr-belvedere/db"
 	"net/http"
-	_ "os"
+	"os"
+	"os"
 )
 
 func respondWithError(code int, message string, c *gin.Context) {
@@ -22,10 +23,10 @@ func TokenAuthenticate(c *gin.Context) {
 		return
 	}
 
-	//if token != os.Getenv("API_TOKEN") {
-	//	respondWithError(http.StatusUnauthorized, "Invalid API token", c)
-	//	return
-	//}
+	if token != os.Getenv("API_TOKEN") {
+		respondWithError(http.StatusUnauthorized, "Invalid API token", c)
+		return
+	}
 
 	c.Next()
 }
