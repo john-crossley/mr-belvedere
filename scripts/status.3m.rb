@@ -18,6 +18,11 @@ def get_color_for_status(status)
   end
 end
 
+def parse_time(millis)
+  time = Time.at(millis / 1000)
+  time.strftime("%a%l:%S%P -%e %b %Y")
+end
+
 begin
   buffer = open(request_uri).read
 rescue Exception => e
@@ -34,10 +39,11 @@ end
 puts "---"
 
 results.each do |job|
-  puts "Job: #{job[:name]} | size=12"
+  puts "#{job[:name]} | size=12"
   puts "├ Author: #{job[:author]} | size=12"
   puts "├ Version: #{job[:version]} | size=12"
   puts "├ Branch: #{job[:branch]} | size=12 href=#{job[:branch_url]}"
-  puts "└ Status: #{job[:status]} | color=#{get_color_for_status(job[:status])} size=12 href=#{job[:build_url]}"
+  puts "├ Status: #{job[:status]} | color=#{get_color_for_status(job[:status])} size=12 href=#{job[:build_url]}"
+  puts "└ Built: #{parse_time(job[:updated_on])} | size=12"
   puts "---"
 end
