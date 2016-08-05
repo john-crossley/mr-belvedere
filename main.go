@@ -32,7 +32,7 @@ func main() {
         v1.GET("/jobs", jobs.List)
 		v1.GET("/jobs/:id", jobs.Find)
 		v1.POST("/jobs", jobs.Create)
-		v1.PUT("/jobs/:id", jobs.Update)
+		v1.PUT("/jobs", jobs.Update)
 		v1.DELETE("/jobs/:id", jobs.Delete)
     }
 

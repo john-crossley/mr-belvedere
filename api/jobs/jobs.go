@@ -63,7 +63,6 @@ func Update(c *gin.Context) {
 		c.Error(err)
 	}
 
-	id := c.Params.ByName("id")
 	doc := bson.M{
 		"name": job.Name,
 		"branch": job.Branch,
@@ -74,11 +73,14 @@ func Update(c *gin.Context) {
 		"branch_url": job.BranchUrl,
 		"updated_on": time.Now().UnixNano() / int64(time.Millisecond),
 	}
-	jobDoc, upsertERR := db.C(models.CollectionJob).UpsertId(id, doc)
-	if upsertERR != nil {
+
+	document, err := db.C(models.CollectionJob).Upsert(bson.M{"name": job.Name}, doc)
+
+	if err != nil {
 		c.Error(err)
 	}
-	c.JSON(http.StatusOK, jobDoc)
+
+	c.JSON(http.StatusOK, document)
 }
 
 func Delete(c *gin.Context) {
